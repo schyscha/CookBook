@@ -1,3 +1,3 @@
 # CookBook
-Team project for "Mobile Applications" course
+Team project for "Mobile Applications" course  
 April - June 2019
