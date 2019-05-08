@@ -9,12 +9,13 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true" app:srcCompat="@android:drawable/btn_plus"
+            android:clickable="true" app:srcCompat="@android:drawable/ic_menu_add"
             android:id="@+id/button"
             android:focusable="true" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.826" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.921" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.91"/>
+            app:layout_constraintVertical_bias="0.949" app:backgroundTint="@color/bootstrap_brand_secondary_text"
+            app:maxImageSize="@android:dimen/app_icon_size"/>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -35,14 +36,9 @@
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            <GridView
+            <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/gridview" android:numColumns="2"
-                    android:gravity="center" android:visibility="visible"
-                    android:horizontalSpacing="@dimen/bootstrap_dropdown_default_edge_width"
-                    android:verticalSpacing="@dimen/bootstrap_dropdown_default_edge_width"
-                    android:stretchMode="columnWidth"/>
+                    android:layout_height="wrap_content" android:id="@+id/recyclerview"/>
         </ScrollView>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

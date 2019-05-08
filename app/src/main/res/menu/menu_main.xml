@@ -11,6 +11,10 @@
       android:title="Statystyki"
       android:orderInCategory="100"
       app:showAsAction="never"/>
+<item android:id="@+id/action_search"
+      android:title="Co ugotować?"
+      android:orderInCategory="100"
+      app:showAsAction="never"/>
 <item android:id="@+id/action_clean"
       android:title="Usuń wszystko"
       android:orderInCategory="100"
