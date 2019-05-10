@@ -10,12 +10,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true" app:srcCompat="@android:drawable/ic_menu_add"
-            android:id="@+id/button"
+            android:id="@+id/button_add_dish"
             android:focusable="true" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.921" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.949" app:backgroundTint="@color/bootstrap_brand_secondary_text"
-            app:maxImageSize="@android:dimen/app_icon_size"/>
+            app:layout_constraintVertical_bias=".949" app:backgroundTint="@color/bootstrap_brand_secondary_text"
+            app:maxImageSize="@android:dimen/app_icon_size" android:onClick="add"/>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -27,15 +27,17 @@
             <Button
                     android:text="Sortuj A-Z"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/button_sort_az" android:layout_weight="1"/>
+                    android:layout_height="wrap_content" android:id="@+id/button_sort_az" android:layout_weight="1"
+                    android:onClick="sortAZ"/>
             <Button
                     android:text="Sortuj wg. ocen"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/button_sort_stars" android:layout_weight="1"/>
+                    android:layout_height="wrap_content" android:id="@+id/button_sort_stars" android:layout_weight="1"
+                    android:onClick="sortStars"/>
         </LinearLayout>
         <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent" android:onClick="add">
             <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/recyclerview"/>

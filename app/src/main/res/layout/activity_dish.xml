@@ -19,7 +19,7 @@
         <Button
                 android:text="Usuń potrawę"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/button"/>
+                android:layout_height="wrap_content" android:id="@+id/button_add_dish"/>
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:id="@+id/cardview"
@@ -38,6 +38,13 @@
                         android:layout_height="wrap_content" android:id="@+id/nazwa" android:textSize="30sp"
                         android:textStyle="bold" android:paddingLeft="@dimen/bootstrap_h5_vert_padding"
                         android:paddingRight="@dimen/bootstrap_h5_vert_padding"/>
+                <TextView
+                        android:text="tagi z bazy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/tagi"
+                        android:paddingLeft="@dimen/bootstrap_h5_vert_padding"
+                        android:paddingRight="@dimen/bootstrap_h5_vert_padding" android:textSize="18sp"
+                        android:textStyle="italic"/>
                 <Space
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -54,15 +61,15 @@
                         android:paddingLeft="@dimen/bootstrap_h5_vert_padding"
                         android:paddingRight="@dimen/bootstrap_h5_vert_padding"/>
                 <TextView
-                        android:text="Opis:"
+                        android:text="Sposób przyrządzenia:"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/h_opis" android:textSize="24sp"
+                        android:layout_height="wrap_content" android:id="@+id/h_sposob" android:textSize="24sp"
                         android:paddingLeft="@dimen/bootstrap_h5_vert_padding"
                         android:paddingRight="@dimen/bootstrap_h5_vert_padding" android:textStyle="italic"/>
                 <TextView
-                        android:text="opis z bazy"
+                        android:text="sposob z bazy"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/opis" android:textSize="20sp"
+                        android:layout_height="wrap_content" android:id="@+id/sposob" android:textSize="20sp"
                         android:paddingLeft="@dimen/bootstrap_h5_vert_padding"
                         android:paddingRight="@dimen/bootstrap_h5_vert_padding"/>
             </LinearLayout>
