@@ -24,12 +24,20 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <Button
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                    app:showOutline="false"
+                    app:roundedCorners="true"
+                    app:bootstrapBrand="success"
+                    android:textSize="18sp" android:textStyle="bold"
                     android:text="Sortuj A-Z"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/button_sort_az" android:layout_weight="1"
                     android:onClick="sortAZ"/>
-            <Button
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                    app:showOutline="false"
+                    app:roundedCorners="true"
+                    app:bootstrapBrand="success"
+                    android:textSize="18sp" android:textStyle="bold"
                     android:text="Sortuj wg. ocen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/button_sort_stars" android:layout_weight="1"

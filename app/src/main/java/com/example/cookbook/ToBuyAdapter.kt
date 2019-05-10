@@ -6,11 +6,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.beardedhen.androidbootstrap.TypefaceProvider
 
 
 class ToBuyAdapter(val list:ArrayList<String>): RecyclerView.Adapter<ToBuyAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToBuyAdapter.ViewHolder {
+        TypefaceProvider.registerDefaultIconSets();
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_tobuy, parent, false)
         return ViewHolder(v)
     }

@@ -22,6 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ToBuy"></activity>
+        <activity android:name=".Stats"></activity>
+        <activity android:name=".FindDish"></activity>
     </application>
 
 </manifest>

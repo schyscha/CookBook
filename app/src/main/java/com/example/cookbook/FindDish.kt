@@ -1,34 +1,21 @@
 package com.example.cookbook
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
 import com.beardedhen.androidbootstrap.TypefaceProvider
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.ArrayList
 
-class MainActivity : AppCompatActivity() {
-
+class FindDish : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_finddish)
         TypefaceProvider.registerDefaultIconSets();
-
-        recyclerview.layoutManager = LinearLayoutManager(this)
-
-        var list = ArrayList<Dish>()
-        //todo: sciagniecie bazy i umieszczenie jej obiektow jako Dish w list
-
-        val myadapter = DishAdapter(list)
-        recyclerview.adapter = myadapter
 
     }
 
@@ -36,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_main, menu)
+        var item = menu.findItem(R.id.action_clean)
+        item.setVisible(false)
         return true
     }
 
@@ -76,26 +65,13 @@ class MainActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
 
         builder.setTitle("O aplikacji")
-        builder.setMessage(Html.fromHtml("<b>Wersja 0.2<br><br>Autorzy:</b><br><i> " +
-                "Olga Błaszczyk<br> Bartosz Drzaga<br> Filip Gawin<br> Szymon Rozmarynowski</i>"))
+        builder.setMessage(
+            Html.fromHtml("<b>Wersja 0.2<br><br>Autorzy:</b><br><i> " +
+                    "Olga Błaszczyk<br> Bartosz Drzaga<br> Filip Gawin<br> Szymon Rozmarynowski</i>"))
 
         builder.setPositiveButton("Zamknij"){dialog, which ->}
         dialog = builder.create()
         dialog.show()
     }
 
-    //todo: funkcje sortujące do przycisków
-    fun sortAZ(view: View){
-
-    }
-
-    fun sortStars(view: View){
-
-    }
-
-    //todo: dodawanie do bazy potraw
-    fun add(view: View){
-
-    }
 }
-
