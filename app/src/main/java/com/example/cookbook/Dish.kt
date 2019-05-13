@@ -42,7 +42,9 @@ data class Dish(var nr:Int, var nazwa:String, var linki:Array<String>, var tagi:
         return when (item.itemId) {
             R.id.action_main -> {
                 val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("EXIT", true);
+                startActivity(intent);
                 true
             }
             R.id.action_tobuy -> {

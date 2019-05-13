@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         TypefaceProvider.registerDefaultIconSets();
 
+
+
         recyclerview.layoutManager = LinearLayoutManager(this)
 
         var list = ArrayList<Dish>()
@@ -43,6 +45,9 @@ class MainActivity : AppCompatActivity() {
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
             backToast.cancel()
             super.onBackPressed()
+            if (getIntent().getBooleanExtra("EXIT", false)) {
+                finish()
+            }
             return
         } else {
             backToast = Toast.makeText(baseContext, "Naciśnij WSTECZ jeszcze raz żeby wyjść", Toast.LENGTH_SHORT)
