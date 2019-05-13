@@ -25,12 +25,19 @@ class FindDish : AppCompatActivity() {
         inflater.inflate(R.menu.menu_main, menu)
         var item = menu.findItem(R.id.action_clean)
         item.setVisible(false)
+        var self = menu.findItem(R.id.action_search)
+        self.setVisible(false)
         return true
     }
 
     //menu kontekstowe
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.action_main -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                true
+            }
             R.id.action_tobuy -> {
                 val intent = Intent(this, ToBuy::class.java)
                 startActivity(intent)
@@ -42,12 +49,9 @@ class FindDish : AppCompatActivity() {
                 true
             }
             R.id.action_search -> {
-                val intent = Intent(this, FindDish::class.java)
-                startActivity(intent)
                 true
             }
             R.id.action_clean -> {
-                //todo: fill
                 true
             }
             R.id.action_about -> {
@@ -66,7 +70,7 @@ class FindDish : AppCompatActivity() {
 
         builder.setTitle("O aplikacji")
         builder.setMessage(
-            Html.fromHtml("<b>Wersja 0.2<br><br>Autorzy:</b><br><i> " +
+            Html.fromHtml("<b>Wersja 0.3<br><br>Autorzy:</b><br><i> " +
                     "Olga Błaszczyk<br> Bartosz Drzaga<br> Filip Gawin<br> Szymon Rozmarynowski</i>"))
 
         builder.setPositiveButton("Zamknij"){dialog, which ->}
