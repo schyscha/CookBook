@@ -12,8 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.beardedhen.androidbootstrap.TypefaceProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.ArrayList
+import android.widget.Toast
+
+
 
 class MainActivity : AppCompatActivity() {
+
+    private var backPressedTime: Long = 0
+    private lateinit var backToast : Toast
 
 
 
@@ -30,6 +36,20 @@ class MainActivity : AppCompatActivity() {
         val myadapter = DishAdapter(list)
         recyclerview.adapter = myadapter
 
+    }
+
+    //obsługa wyjscia z aplikajci po podwojnym kliknieciu WSTECZ w glownej aktywnosci
+    override fun onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            backToast.cancel()
+            super.onBackPressed()
+            return
+        } else {
+            backToast = Toast.makeText(baseContext, "Naciśnij WSTECZ jeszcze raz żeby wyjść", Toast.LENGTH_SHORT)
+            backToast.show()
+        }
+
+        backPressedTime = System.currentTimeMillis()
     }
 
     //dodanie menu kontekstowego
