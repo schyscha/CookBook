@@ -13,6 +13,12 @@ import com.beardedhen.androidbootstrap.TypefaceProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.ArrayList
 import android.widget.Toast
+import android.R.string.cancel
+import android.content.DialogInterface
+import android.text.InputType
+import android.widget.EditText
+
+
 
 
 
@@ -20,7 +26,6 @@ class MainActivity : AppCompatActivity() {
 
     private var backPressedTime: Long = 0
     private lateinit var backToast : Toast
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,36 +88,84 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.action_search -> {
+                showSearchDialog()
+                true
+            }
+            R.id.action_finddish -> {
                 val intent = Intent(this, FindDish::class.java)
                 startActivity(intent)
                 true
             }
             R.id.action_clean -> {
-                //todo: fill
+                showCleanDialog()
                 true
             }
             R.id.action_about -> {
-                showDialog()
+                showAboutDialog()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    //okno dialogowe z menu kontekstowego
-    private fun showDialog(){
+    //okno dialogowe o aplikacji z menu kontekstowego
+    private fun showAboutDialog(){
         lateinit var dialog : AlertDialog
 
         val builder = AlertDialog.Builder(this)
 
         builder.setTitle("O aplikacji")
-        builder.setMessage(Html.fromHtml("<b>Wersja 0.3<br><br>Autorzy:</b><br><i> " +
+        builder.setMessage(Html.fromHtml("<b>Wersja 0.4<br><br>Autorzy:</b><br><i> " +
                 "Olga Błaszczyk<br> Bartosz Drzaga<br> Filip Gawin<br> Szymon Rozmarynowski</i>"))
 
         builder.setPositiveButton("Zamknij"){dialog, which ->}
         dialog = builder.create()
         dialog.show()
     }
+
+    //okno dialogowe wyszukiwania potraw z menu kontekstowego
+    private fun showSearchDialog(){
+        lateinit var search: String
+        lateinit var dialog : AlertDialog
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Wyszukaj potrawę")
+
+        val input = EditText(this)
+        input.inputType = InputType.TYPE_CLASS_TEXT
+        builder.setView(input)
+
+        builder.setPositiveButton(
+            "Wyszukaj"
+        ) { dialog, which -> search = input.text.toString()}//todo: wyszukiwanie, pokazywanie rezultatow
+        builder.setNegativeButton(
+            "Anuluj"
+        ) { dialog, which -> dialog.cancel() }
+
+        dialog = builder.create()
+        dialog.show()
+    }
+
+    //okno dialogowe usuwania zawartosci listy z menu kontekstowego
+    private fun showCleanDialog(){
+        lateinit var dialog:AlertDialog
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Usunąć wszystkie pozycje?")
+
+        builder.setMessage("Ta operacja nie może zostać cofnięta")
+
+
+        builder.setPositiveButton(
+            "Usuń"
+        ) { dialog, which -> }//todo: usuwanie wszystkiego z listy potraw
+        builder.setNegativeButton(
+            "Anuluj"
+        ) { dialog, which -> dialog.cancel() }
+
+        dialog = builder.create()
+        dialog.show()
+    }
+
 
     //todo: funkcje sortujące do przycisków
     fun sortAZ(view: View){

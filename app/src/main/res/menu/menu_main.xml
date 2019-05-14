@@ -3,6 +3,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+
+    <item android:id="@+id/action_confirm"
+          android:icon="@drawable/ic_action_confirm"
+          android:title="Zatwierdź"
+          android:visible="false"
+          app:showAsAction="always"/>
+
     <item android:id="@+id/action_main"
           android:title="Strona główna"
           android:orderInCategory="100"
@@ -16,6 +23,10 @@
           android:orderInCategory="100"
           app:showAsAction="never"/>
     <item android:id="@+id/action_search"
+          android:title="Wyszukaj potrawę"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+    <item android:id="@+id/action_finddish"
           android:title="Co ugotować?"
           android:orderInCategory="100"
           app:showAsAction="never"/>

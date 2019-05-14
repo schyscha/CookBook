@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content">
             <com.beardedhen.androidbootstrap.BootstrapButton
                     app:showOutline="false"
-                    app:roundedCorners="true"
+                    app:roundedCorners="false"
                     app:bootstrapBrand="success"
                     android:textSize="18sp" android:textStyle="bold"
                     android:text="Sortuj A-Z"
@@ -35,7 +35,7 @@
                     android:onClick="sortAZ"/>
             <com.beardedhen.androidbootstrap.BootstrapButton
                     app:showOutline="false"
-                    app:roundedCorners="true"
+                    app:roundedCorners="false"
                     app:bootstrapBrand="success"
                     android:textSize="18sp" android:textStyle="bold"
                     android:text="Sortuj wg. ocen"
