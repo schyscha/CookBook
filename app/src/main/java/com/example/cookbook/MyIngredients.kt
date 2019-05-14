@@ -6,6 +6,7 @@ import android.text.Html
 import android.text.InputType
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -14,21 +15,24 @@ import com.beardedhen.androidbootstrap.TypefaceProvider
 import kotlinx.android.synthetic.main.activity_tobuy.*
 import java.util.ArrayList
 
-class FindDish : AppCompatActivity() {
-
-
+class MyIngredients : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_finddish)
-        TypefaceProvider.registerDefaultIconSets()
+        setContentView(R.layout.activity_myingredients)
+        TypefaceProvider.registerDefaultIconSets();
 
         recyclerview.layoutManager = LinearLayoutManager(this)
 
         var list = ArrayList<String>()
-        //todo: sciagniecie i umieszczenie listy skladnikow
+        //todo: sciagniecie bazy i umieszczenie jej elementow jako String w list
 
-        val myadapter = FindDishAdapter(list)
+        val myadapter = MyIngredientsAdapter(list)
         recyclerview.adapter = myadapter
+
+    }
+
+    //todo: dodawanie do bazy listy posiadanych składników
+    fun addIngredient(view: View){
 
     }
 
@@ -36,12 +40,8 @@ class FindDish : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_main, menu)
-        var item = menu.findItem(R.id.action_clean)
-        item.setVisible(false)
-        var self = menu.findItem(R.id.action_finddish)
+        var self = menu.findItem(R.id.action_myingredients)
         self.setVisible(false)
-
-        menu.findItem(R.id.action_confirm).setVisible(true)
         return true
     }
 
@@ -60,11 +60,6 @@ class FindDish : AppCompatActivity() {
                 startActivity(intent)
                 true
             }
-            R.id.action_myingredients -> {
-                val intent = Intent(this, MyIngredients::class.java)
-                startActivity(intent)
-                true
-            }
             R.id.action_stats -> {
                 val intent = Intent(this, Stats::class.java)
                 startActivity(intent)
@@ -74,12 +69,17 @@ class FindDish : AppCompatActivity() {
                 showSearchDialog()
                 true
             }
-            R.id.action_about -> {
-                showAboutDialog()
+            R.id.action_finddish -> {
+                val intent = Intent(this, FindDish::class.java)
+                startActivity(intent)
                 true
             }
-            R.id.action_confirm -> {
-                //todo: wyszukiwanie potrawy po skladnikach
+            R.id.action_clean -> {
+                showCleanDialog()
+                true
+            }
+            R.id.action_about -> {
+                showAboutDialog()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -124,5 +124,24 @@ class FindDish : AppCompatActivity() {
         dialog.show()
     }
 
+    //okno dialogowe usuwania zawartosci listy z menu kontekstowego
+    private fun showCleanDialog(){
+        lateinit var dialog:AlertDialog
 
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Usunąć wszystkie pozycje?")
+
+        builder.setMessage("Ta operacja nie może zostać cofnięta")
+
+
+        builder.setPositiveButton(
+            "Usuń"
+        ) { dialog, which -> }//todo: usuwanie wszystkiego z listy posiadanych skladnikow
+        builder.setNegativeButton(
+            "Anuluj"
+        ) { dialog, which -> dialog.cancel() }
+
+        dialog = builder.create()
+        dialog.show()
+    }
 }

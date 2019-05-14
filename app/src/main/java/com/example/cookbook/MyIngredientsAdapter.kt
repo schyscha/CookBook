@@ -9,16 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.beardedhen.androidbootstrap.TypefaceProvider
 
 
-class ToBuyAdapter(val list:ArrayList<String>): RecyclerView.Adapter<ToBuyAdapter.ViewHolder>() {
+class MyIngredientsAdapter(val list:ArrayList<String>): RecyclerView.Adapter<MyIngredientsAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToBuyAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyIngredientsAdapter.ViewHolder {
         TypefaceProvider.registerDefaultIconSets();
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_ingredient, parent, false)
         return ViewHolder(v)
     }
 
     //this method is binding the data on the list
-    override fun onBindViewHolder(holder: ToBuyAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyIngredientsAdapter.ViewHolder, position: Int) {
         holder.bindItems(list[position])
     }
 
@@ -35,7 +35,7 @@ class ToBuyAdapter(val list:ArrayList<String>): RecyclerView.Adapter<ToBuyAdapte
             //set the onclick listener for the single list item
             val btn: Button = itemView.findViewById(R.id.button_delete_ingredient)
             btn.setOnClickListener({
-                //todo: usuniecie elementu z bazy(listy zakupow)
+                //todo: usuniecie elementu z bazy(listy posiadanych skladnikow)
             })
         }
 

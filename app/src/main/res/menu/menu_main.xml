@@ -18,6 +18,10 @@
           android:title="Lista zakupów"
           android:orderInCategory="100"
           app:showAsAction="never"/>
+    <item android:id="@+id/action_myingredients"
+          android:title="Posiadane składniki"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
     <item android:id="@+id/action_stats"
           android:title="Statystyki"
           android:orderInCategory="100"

@@ -57,6 +57,11 @@ data class Dish(var nr:Int, var nazwa:String, var linki:Array<String>, var tagi:
                 startActivity(intent)
                 true
             }
+            R.id.action_myingredients -> {
+                val intent = Intent(this, MyIngredients::class.java)
+                startActivity(intent)
+                true
+            }
             R.id.action_stats -> {
                 val intent = Intent(this, Stats::class.java)
                 startActivity(intent)
