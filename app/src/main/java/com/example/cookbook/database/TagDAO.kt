@@ -21,4 +21,7 @@ interface TagDAO {
 
     @Query("Select * from tags Where id = :id")
     fun getTag(id: Long): List<Tag>
+
+    @Query("Select * from tags")
+    fun getAll(): List<Tag>
 }

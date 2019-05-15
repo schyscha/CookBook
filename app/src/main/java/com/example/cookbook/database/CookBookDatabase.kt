@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(entities = [Ingredient::class, Recipe::class, RecipeIngredient::class, RecipeTag::class, Tag::class], version = 1)
 @TypeConverters(TypeConverter::class)
@@ -25,16 +24,22 @@ abstract class CookBookDatabase: RoomDatabase() {
                 INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
             }
 
-        private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(context.applicationContext,
+        private fun buildDatabase(context: Context): CookBookDatabase {
+            val db = Room.databaseBuilder(
+                context.applicationContext,
                 CookBookDatabase::class.java,
-                "CookBookDatabase.db")
+                "CookBookDatabase.db"
+            )
                 .allowMainThreadQueries()
-                .addCallback(object : Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        //prepopulate data here
-                    }
-                })
                 .build()
+            loadInitialData(context, db)
+            return db
+        }
+
+        private fun loadInitialData(context: Context, db: CookBookDatabase) {
+            if(db.tagDao().getAll().isEmpty()) {
+                db.runInTransaction(TestDataLoader(context, db))
+            }
+        }
     }
 }

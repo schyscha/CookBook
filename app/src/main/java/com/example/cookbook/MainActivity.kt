@@ -16,6 +16,7 @@ import android.widget.Toast
 import android.R.string.cancel
 import android.content.DialogInterface
 import android.text.InputType
+import android.util.Log
 import android.widget.EditText
 import com.example.cookbook.database.*
 
@@ -41,26 +42,19 @@ class MainActivity : AppCompatActivity() {
         val myadapter = DishAdapter(list)
         recyclerview.adapter = myadapter
 
-
-        /*test bazy na szybko
         val database = CookBookDatabase.getInstance(this)
-        val tagDao = database.tagDao()
-        tagDao.insert(Tag(name = "pierwszy tag"))
         val recipeDAO = database.recipeDao()
-        recipeDAO.insert(Recipe(
-            name = "Pierwsza potrawa",
-            image_urls = arrayListOf("https://previews.123rf.com/images/emojiimage/emojiimage1806/emojiimage180600223/103279022-flat-vector-icon-of-yellow-bowl-with-tasty-salad-appetizing-dish-from-boiled-eggs-and-fresh-vegetabl.jpg"),
-            instruction = "zrobić żeby było dobre",
-            rating = 5f
-            )
-        )
+        Log.e("CB", recipeDAO.getAll().toString())
+        /*
+        val tagDao = database.tagDao()
         val ingredientDAO = database.ingredientDao()
-        //ingredientDAO.insert(Ingredient(name = "składnik 1", is_owned = false))
         val recipeIngredientDAO = database.recipeIngredientDao()
-        recipeIngredientDAO.insert(RecipeIngredient(1, 1, 10, "sztuk"))
         val recipeTagDAO = database.recipeTagDao()
-        recipeTagDAO.insert(RecipeTag(1, 1))*/
 
+        val r = recipeDAO.getRecipe(1)[0]
+        Log.e("CB", r.toString())
+        Log.e("CB", recipeTagDAO.getTagsForRecipe(r.id).toString())
+        Log.e("CB", recipeIngredientDAO.getIngredientsForRecipe(r.id).toString())*/
     }
 
     //obsługa wyjscia z aplikajci po podwojnym kliknieciu WSTECZ w glownej aktywnosci
