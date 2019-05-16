@@ -6,8 +6,15 @@ import android.view.Menu
 import android.view.View
 import com.beardedhen.androidbootstrap.TypefaceProvider
 
-data class Dish(var nr:Int, var nazwa:String, var linki:Array<String>, var tagi:Array<String>, var skladniki:Array<String>, var sposob:String)
-    : MyActivity() {
+data class Dish(
+    var nr: Int,
+    var nazwa: String,
+    var ocena: Float,
+    var linki: Array<String>,
+    var tagi: Array<String>,
+    var skladniki: Array<String>,
+    var sposob: String
+) : MyActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

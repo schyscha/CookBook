@@ -19,7 +19,7 @@ class MainActivity : MyActivity() {
     private var backPressedTime: Long = 0
     private lateinit var backToast : Toast
     private var alphabeticalOrder = false
-    private var rateOrder = false
+    private var ratingOrder = false
     private var list = ArrayList<Dish>()
     private var myadapter = DishAdapter(list)
 
@@ -37,6 +37,7 @@ class MainActivity : MyActivity() {
             Dish(
                 0,
                 "Pulpety",
+                4f,
                 arrayOf("link"),
                 arrayOf("studenty lubią"),
                 arrayOf("Pulpety"),
@@ -47,6 +48,7 @@ class MainActivity : MyActivity() {
             Dish(
                 1,
                 "Płatki z mlekiem",
+                3f,
                 arrayOf("link"),
                 arrayOf("tanio"),
                 arrayOf("Płatki", "Mleko"),
@@ -57,6 +59,7 @@ class MainActivity : MyActivity() {
             Dish(
                 2,
                 "Chleb z nutellą",
+                1f,
                 arrayOf("link"),
                 arrayOf("słodko"),
                 arrayOf("Chleb", "Nutella"),
@@ -111,16 +114,16 @@ class MainActivity : MyActivity() {
 
     }
 
-
-    //todo: funkcje sortujące do przycisków
     fun sortAZ(view: View){
         if (!alphabeticalOrder) {
             sort(list, { a, b -> a.nazwa.compareTo(b.nazwa) })
             alphabeticalOrder = true
+            ratingOrder = false
         }
         else {
             reverse(list)
             alphabeticalOrder = false
+            ratingOrder = false
         }
 
         myadapter = DishAdapter(list)
@@ -128,7 +131,19 @@ class MainActivity : MyActivity() {
     }
 
     fun sortStars(view: View){
+        if (!ratingOrder) {
+            sort(list, { a, b -> a.ocena.compareTo(b.ocena) })
+            ratingOrder = true
+            alphabeticalOrder = false
+        }
+        else {
+            reverse(list)
+            ratingOrder = false
+            alphabeticalOrder = false
+        }
 
+        myadapter = DishAdapter(list)
+        recyclerview.adapter = myadapter
     }
 
     //todo: dodawanie do bazy potraw
