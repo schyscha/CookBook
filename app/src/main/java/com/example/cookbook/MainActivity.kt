@@ -27,6 +27,40 @@ class MainActivity : MyActivity() {
         recyclerview.layoutManager = LinearLayoutManager(this)
 
         var list = ArrayList<Dish>()
+
+        // todo: Usunąć te hardcode'owane dania
+        list.add(
+            Dish(
+                0,
+                "Pulpety",
+                arrayOf("link"),
+                arrayOf("studenty lubią"),
+                arrayOf("Pulpety"),
+                "Zrobić"
+            )
+        )
+        list.add(
+            Dish(
+                1,
+                "Płatki z mlekiem",
+                arrayOf("link"),
+                arrayOf("tanio"),
+                arrayOf("Płatki", "Mleko"),
+                "Zrobić"
+            )
+        )
+        list.add(
+            Dish(
+                2,
+                "Chleb z nutellą",
+                arrayOf("link"),
+                arrayOf("słodko"),
+                arrayOf("Chleb", "Nutella"),
+                "Zrobić"
+            )
+        )
+
+
         //todo: sciagniecie bazy i umieszczenie jej obiektow jako Dish w list
 
         val myadapter = DishAdapter(list)
