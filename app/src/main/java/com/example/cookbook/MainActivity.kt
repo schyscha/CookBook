@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.beardedhen.androidbootstrap.TypefaceProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
-
+import android.util.Log
+import com.example.cookbook.database.*
 
 class MainActivity : MyActivity() {
 
@@ -31,6 +32,18 @@ class MainActivity : MyActivity() {
         val myadapter = DishAdapter(list)
         recyclerview.adapter = myadapter
 
+        val database = CookBookDatabase.getInstance(this)
+        val recipeDAO = database.recipeDao()
+        val ingredientDAO = database.ingredientDao()
+        Log.e("CB", recipeDAO.getBestRecipesForOwnedIngredients().toString())
+        Log.e("CB", recipeDAO.getRecipesBySearch("paszteciki").toString())
+        Log.e("CB", ingredientDAO.getIngredientsToBuyForRecipe(3).toString())
+        Log.e("CB", database.getAllCompleteRecipe().toString())
+        /*
+        val tagDao = database.tagDao()
+        val ingredientDAO = database.ingredientDao()
+        val recipeIngredientDAO = database.recipeIngredientDao()
+        val recipeTagDAO = database.recipeTagDao()*/
     }
 
     //obsługa wyjscia z aplikajci po podwojnym kliknieciu WSTECZ w glownej aktywnosci
