@@ -126,8 +126,8 @@ class MainActivity : MyActivity() {
             ratingOrder = false
         }
 
-        myadapter = DishAdapter(list)
-        recyclerview.adapter = myadapter
+        myadapter.setDishes(list)
+        myadapter.notifyDataSetChanged()
     }
 
     fun sortStars(view: View){
@@ -142,8 +142,8 @@ class MainActivity : MyActivity() {
             alphabeticalOrder = false
         }
 
-        myadapter = DishAdapter(list)
-        recyclerview.adapter = myadapter
+        myadapter.setDishes(list)
+        myadapter.notifyDataSetChanged()
     }
 
     //todo: dodawanie do bazy potraw

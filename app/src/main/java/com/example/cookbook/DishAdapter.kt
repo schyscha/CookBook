@@ -7,7 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class DishAdapter(val list:ArrayList<Dish>): RecyclerView.Adapter<DishAdapter.ViewHolder>() {
+class DishAdapter(var list:ArrayList<Dish>): RecyclerView.Adapter<DishAdapter.ViewHolder>() {
+
+    fun setDishes(list: ArrayList<Dish>) {
+        this.list = list
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DishAdapter.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_dish, parent, false)
