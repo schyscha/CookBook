@@ -24,4 +24,27 @@ interface RecipeDAO {
 
     @Query("Select * from recipes")
     fun getAll(): List<Recipe>
+
+    @Query("Select * from recipes r Inner Join recipe_ingredient ri on r.id = ri.recipe_id Where ri.ingredient_id = :ingredientID")
+    fun getRecipesForIngredient(ingredientID: Long): List<Recipe>
+
+    @Query("""
+        Select * from recipes r Inner Join recipe_ingredient ri on r.id = ri.recipe_id
+        Where ri.ingredient_id IN (:ingredientsIDs) Group By r.name Having Count(ri.ingredient_id) > 0
+        Order By Count(ri.ingredient_id) DESC
+    """)
+    fun getBestRecipesForSelectedIngredients(ingredientsIDs: List<Long>): List<Recipe>
+
+    @Query("""
+        Select * from recipes r Inner Join recipe_ingredient ri on r.id = ri.recipe_id
+        Where ri.ingredient_id IN (Select id From ingredients Where is_owned = 1) Group By r.name Having Count(ri.ingredient_id) > 0
+        Order By Count(ri.ingredient_id) DESC
+    """)
+    fun getBestRecipesForOwnedIngredients(): List<Recipe>
+
+    @Query("Select * from recipes r Inner Join recipe_tag rt on r.id = rt.recipe_id Where rt.tag_id = :tagID")
+    fun getRecipesForTag(tagID: Long): List<Recipe>
+
+    @Query("Select * from recipes Where name Like '%' || :name || '%'") //operator || to konkatenacja stringów w SQLite
+    fun getRecipesBySearch(name: String): List<Recipe>
 }

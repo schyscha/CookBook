@@ -19,15 +19,12 @@ interface RecipeIngredientDAO {
     @Delete
     fun delete(recipeIngredient: RecipeIngredient)
 
-    @Query("Select * from ingredients i Inner Join recipe_ingredient ri on i.id = ri.ingredient_id Where ri.recipe_id = :recipeID")
-    fun getIngredientsForRecipe(recipeID: Long): List<Ingredient>
-
     @Query("Select * from recipe_ingredient Where recipe_id = :recipeID")
-    fun getRecipeIngredientForRecipe(recipeID: Long): List<RecipeIngredient>
-
-    @Query("Select * from recipes r Inner Join recipe_ingredient ri on r.id = ri.recipe_id Where ri.ingredient_id = :ingredientID")
-    fun getRecipesForIngredient(ingredientID: Long): List<Recipe>
+    fun getRecipeIngredientRelationsForRecipe(recipeID: Long): List<RecipeIngredient>
 
     @Query("Select * from recipe_ingredient Where ingredient_id = :ingredientID")
-    fun getRecipeIngredientForIngredient(ingredientID: Long): List<RecipeIngredient>
+    fun getRecipeIngredientRelationsForIngredient(ingredientID: Long): List<RecipeIngredient>
+
+    @Query("Select * from recipe_ingredient Where recipe_id = :recipeID And ingredient_id = :ingredientID")
+    fun getRecipeIngredientRelationForRecipeAndIngredient(recipeID: Long, ingredientID: Long): List<RecipeIngredient>
 }

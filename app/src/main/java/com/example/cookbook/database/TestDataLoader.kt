@@ -26,7 +26,7 @@ class TestDataLoader(val context: Context, val database: CookBookDatabase) : Run
             Ingredient(0, "papryczki zielone", false),
             Ingredient(0, "ząbki czosnku", false),
             Ingredient(0, "cebula", false),
-            Ingredient(0, "sól", false)
+            Ingredient(0, "sól", true)
         )
 
         recipeDAO.insert(Recipe(0,
@@ -93,7 +93,7 @@ class TestDataLoader(val context: Context, val database: CookBookDatabase) : Run
         ingredientDAO.insertAll(
             Ingredient(0, "schab wieprzowy", false),
             Ingredient(0, "ser żółty", false),
-            Ingredient(0, "bułka tarta", false)
+            Ingredient(0, "bułka tarta", true)
         )
 
         recipeDAO.insert(

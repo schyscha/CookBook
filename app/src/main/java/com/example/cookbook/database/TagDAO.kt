@@ -24,4 +24,7 @@ interface TagDAO {
 
     @Query("Select * from tags")
     fun getAll(): List<Tag>
+
+    @Query("Select * from tags t Inner Join recipe_tag rt on t.id = rt.tag_id Where rt.recipe_id = :recipeID")
+    fun getTagsForRecipe(recipeID: Long): List<Tag>
 }

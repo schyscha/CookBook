@@ -18,10 +18,4 @@ interface RecipeTagDAO {
 
     @Delete
     fun delete(recipeTag: RecipeTag)
-
-    @Query("Select * from tags t Inner Join recipe_tag rt on t.id = rt.tag_id Where rt.recipe_id = :recipeID")
-    fun getTagsForRecipe(recipeID: Long): List<Tag>
-
-    @Query("Select * from recipes r Inner Join recipe_tag rt on r.id = rt.recipe_id Where rt.tag_id = :tagID")
-    fun getRecipesForTag(tagID: Long): List<Recipe>
 }

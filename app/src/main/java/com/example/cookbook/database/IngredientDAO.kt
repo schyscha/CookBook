@@ -21,4 +21,19 @@ interface IngredientDAO {
 
     @Query("Select * from ingredients where id = :id")
     fun getIngredient(id: Long): List<Ingredient>
+
+    @Query("Select * from ingredients")
+    fun getAll(): List<Ingredient>
+
+    @Query("Select * from ingredients i Inner Join recipe_ingredient ri on i.id = ri.ingredient_id Where ri.recipe_id = :recipeID")
+    fun getIngredientsForRecipe(recipeID: Long): List<Ingredient>
+
+    @Query("""
+        Select * from ingredients i Inner Join recipe_ingredient ri on i.id = ri.ingredient_id
+        Where ri.recipe_id = :recipeID And i.is_owned = 0
+    """)
+    fun getIngredientsToBuyForRecipe(recipeID: Long): List<Ingredient>
+
+    @Query("Select * from ingredients Where is_owned = 1")
+    fun getOwnedIngredients(): List<Ingredient>
 }

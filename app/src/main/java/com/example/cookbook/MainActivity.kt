@@ -44,7 +44,11 @@ class MainActivity : AppCompatActivity() {
 
         val database = CookBookDatabase.getInstance(this)
         val recipeDAO = database.recipeDao()
-        Log.e("CB", recipeDAO.getAll().toString())
+        val ingredientDAO = database.ingredientDao()
+        Log.e("CB", recipeDAO.getBestRecipesForOwnedIngredients().toString())
+        Log.e("CB", recipeDAO.getRecipesBySearch("paszteciki").toString())
+        Log.e("CB", ingredientDAO.getIngredientsToBuyForRecipe(3).toString())
+        Log.e("CB", database.getAllCompleteRecipe().toString())
         /*
         val tagDao = database.tagDao()
         val ingredientDAO = database.ingredientDao()
@@ -53,8 +57,8 @@ class MainActivity : AppCompatActivity() {
 
         val r = recipeDAO.getRecipe(1)[0]
         Log.e("CB", r.toString())
-        Log.e("CB", recipeTagDAO.getTagsForRecipe(r.id).toString())
-        Log.e("CB", recipeIngredientDAO.getIngredientsForRecipe(r.id).toString())*/
+        Log.e("CB", tagDAO.getTagsForRecipe(r.id).toString())
+        Log.e("CB", recipeDAO.getIngredientsForRecipe(r.id).toString())*/
     }
 
     //obsługa wyjscia z aplikajci po podwojnym kliknieciu WSTECZ w glownej aktywnosci
