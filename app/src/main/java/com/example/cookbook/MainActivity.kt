@@ -10,12 +10,18 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import android.util.Log
 import com.example.cookbook.database.*
+import java.util.Collections.reverse
+import java.util.Collections.sort
+
 
 class MainActivity : MyActivity() {
 
     private var backPressedTime: Long = 0
     private lateinit var backToast : Toast
-
+    private var alphabeticalOrder = false
+    private var rateOrder = false
+    private var list = ArrayList<Dish>()
+    private var myadapter = DishAdapter(list)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +31,6 @@ class MainActivity : MyActivity() {
 
 
         recyclerview.layoutManager = LinearLayoutManager(this)
-
-        var list = ArrayList<Dish>()
 
         // todo: Usunąć te hardcode'owane dania
         list.add(
@@ -63,7 +67,7 @@ class MainActivity : MyActivity() {
 
         //todo: sciagniecie bazy i umieszczenie jej obiektow jako Dish w list
 
-        val myadapter = DishAdapter(list)
+        myadapter = DishAdapter(list)
         recyclerview.adapter = myadapter
 
         val database = CookBookDatabase.getInstance(this)
@@ -110,7 +114,17 @@ class MainActivity : MyActivity() {
 
     //todo: funkcje sortujące do przycisków
     fun sortAZ(view: View){
+        if (!alphabeticalOrder) {
+            sort(list, { a, b -> a.nazwa.compareTo(b.nazwa) })
+            alphabeticalOrder = true
+        }
+        else {
+            reverse(list)
+            alphabeticalOrder = false
+        }
 
+        myadapter = DishAdapter(list)
+        recyclerview.adapter = myadapter
     }
 
     fun sortStars(view: View){
