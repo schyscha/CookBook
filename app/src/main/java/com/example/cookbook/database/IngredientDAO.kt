@@ -36,4 +36,7 @@ interface IngredientDAO {
 
     @Query("Select * from ingredients Where is_owned = 1")
     fun getOwnedIngredients(): List<Ingredient>
+
+    @Query("Select * from ingredients Where name = :name")
+    fun getByName(name: String): List<Ingredient>
 }
