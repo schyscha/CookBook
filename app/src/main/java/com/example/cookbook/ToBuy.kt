@@ -25,7 +25,7 @@ class ToBuy : MyActivity() {
         db = TinyDB(this)
 
         list = db.getListString("TOBUY")
-        if(list == null)
+        if(list.isEmpty())
             Toast.makeText(this,"Twoja lista zakupów jest pusta", Toast.LENGTH_LONG).show();
 
         myadapter = ToBuyAdapter(list, db)
@@ -35,6 +35,7 @@ class ToBuy : MyActivity() {
 
     fun refresh(){
         myadapter.notifyDataSetChanged()
+        db.putListString("TOBUY", list)
     }
 
     fun addToBuy(view: View){
