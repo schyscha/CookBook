@@ -39,12 +39,12 @@ class ToBuyAdapter(val list:ArrayList<String>, val db:TinyDB): RecyclerView.Adap
 
             //set the onclick listener for the single list item
             val btn: BootstrapButton = itemView.findViewById(R.id.button_delete_ingredient)
-            btn.setOnClickListener({
+            btn.setOnClickListener {
                 (nextparent.context as ToBuy).list.remove(data)
                 (nextparent.context as ToBuy).refresh()
                 //todo: to castowanie wyzej nie dziala...
 
-            })
+            }
         }
 
     }

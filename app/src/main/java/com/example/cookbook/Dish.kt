@@ -46,7 +46,7 @@ class Dish : MyActivity() {
         ingredients.append(" ")
         ingredients.append(dish.ingredientsInfo.first().unit)
         for(i in 1..dish.ingredientsInfo.size-1){
-            ingredients.append(", ")
+            ingredients.append("\n")
             ingredients.append(dish.ingredientsInfo.get(i).name)
             ingredients.append(": ")
             ingredients.append(dish.ingredientsInfo.get(i).quantity)
