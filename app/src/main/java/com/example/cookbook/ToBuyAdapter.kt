@@ -32,6 +32,7 @@ class ToBuyAdapter(val list:ArrayList<String>): RecyclerView.Adapter<ToBuyAdapte
             val element: TextView = itemView.findViewById(R.id.txt)
             element.text = data
 
+
             //set the onclick listener for the single list item
             val btn: Button = itemView.findViewById(R.id.button_delete_ingredient)
             btn.setOnClickListener({

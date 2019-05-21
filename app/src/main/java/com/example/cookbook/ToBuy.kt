@@ -1,14 +1,20 @@
 package com.example.cookbook
 
 import android.os.Bundle
+import android.text.InputType
 import android.view.Menu
 import android.view.View
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.beardedhen.androidbootstrap.TypefaceProvider
 import kotlinx.android.synthetic.main.activity_tobuy.*
-import java.util.*
 
 class ToBuy : MyActivity() {
+    lateinit var list : ArrayList<String>
+    val db = TinyDB(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tobuy)
@@ -16,17 +22,34 @@ class ToBuy : MyActivity() {
 
         recyclerview.layoutManager = LinearLayoutManager(this)
 
-        var list = ArrayList<String>()
-        //todo: sciagniecie bazy i umieszczenie jej elementow jako String w list
+        list = db.getListString("TOBUY")
+        if(list == null)
+            Toast.makeText(this,"Twoja lista zakupów jest pusta", Toast.LENGTH_LONG).show();
 
         val myadapter = ToBuyAdapter(list)
         recyclerview.adapter = myadapter
 
     }
 
-    //todo: dodawanie do bazy listy zakupow
     fun addToBuy(view: View){
+        lateinit var search: String
+        lateinit var dialog : AlertDialog
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Wprowadź przedmiot")
 
+        val input = EditText(this)
+        input.inputType = InputType.TYPE_CLASS_TEXT
+        builder.setView(input)
+
+        builder.setPositiveButton(
+            "Dodaj"
+        ) { dialog, which -> if(input.text.toString().isNotEmpty())list.add(input.text.toString()); db.putListString("TOBUY", list)}
+        builder.setNegativeButton(
+            "Anuluj"
+        ) { dialog, which -> dialog.cancel() }
+
+        dialog = builder.create()
+        dialog.show()
     }
 
     //dodanie menu kontekstowego

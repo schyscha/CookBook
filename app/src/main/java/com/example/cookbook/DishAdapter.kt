@@ -1,15 +1,20 @@
 package com.example.cookbook
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.cookbook.database.CompleteRecipe
+import java.lang.StringBuilder
 
 
-class DishAdapter(var list:ArrayList<Dish>): RecyclerView.Adapter<DishAdapter.ViewHolder>() {
+class DishAdapter(var list:ArrayList<CompleteRecipe>): RecyclerView.Adapter<DishAdapter.ViewHolder>() {
 
-    fun setDishes(list: ArrayList<Dish>) {
+    fun setDishes(list: ArrayList<CompleteRecipe>) {
         this.list = list
     }
 
@@ -29,16 +34,28 @@ class DishAdapter(var list:ArrayList<Dish>): RecyclerView.Adapter<DishAdapter.Vi
     }
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        fun bindItems(data : Dish){
+        fun bindItems(data : CompleteRecipe){
             val _nazwa: TextView = itemView.findViewById(R.id.nazwa)
             val _tagi: TextView = itemView.findViewById(R.id.tagi)
-            _nazwa.text = data.nazwa
-            _tagi.text = android.text.TextUtils.join(",", data.tagi)
-            //todo: wstawianie obrazka (po ogarnięciu biblioteki do pokazywania)
+            val _img: ImageView = itemView.findViewById(R.id.img)
+
+            _nazwa.text = data.recipe.name
+
+            val tags= StringBuilder()
+            tags.append(data.tags.first().name)
+            for(i in 1..data.tags.size){
+                tags.append(", ")
+                tags.append(data.tags.get(i).name)
+            }
+            _tagi.text = tags.toString()
+
+            Glide.with(this.itemView).load(data.recipe.image_urls.first()).into(_img);
 
             //set the onclick listener for the single list item
             itemView.setOnClickListener({
-                //todo: przekierowanie do aktywnosci ODPOWIEDNIEJ potrawy z listy(bazy)
+                val id : Long = data.recipe.id
+                val myintent = Intent(it.context, Dish::class.java )
+                myintent.putExtra("id", id)
             })
         }
 

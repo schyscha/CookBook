@@ -20,7 +20,7 @@ class MainActivity : MyActivity() {
     private lateinit var backToast : Toast
     private var alphabeticalOrder = false
     private var ratingOrder = false
-    private var list = ArrayList<Dish>()
+    private var list =  CookBookDatabase.getInstance(this).getAllCompleteRecipe() as ArrayList<CompleteRecipe>
     private var myadapter = DishAdapter(list)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +33,7 @@ class MainActivity : MyActivity() {
         recyclerview.layoutManager = LinearLayoutManager(this)
 
         // todo: Usunąć te hardcode'owane dania
+        /*
         list.add(
             Dish(
                 0,
@@ -66,6 +67,7 @@ class MainActivity : MyActivity() {
                 "Zrobić"
             )
         )
+        */
 
 
         //todo: sciagniecie bazy i umieszczenie jej obiektow jako Dish w list
@@ -116,7 +118,7 @@ class MainActivity : MyActivity() {
 
     fun sortAZ(view: View){
         if (!alphabeticalOrder) {
-            sort(list, { a, b -> a.nazwa.compareTo(b.nazwa) })
+            sort(list, { a, b -> a.recipe.name.compareTo(b.recipe.name) })
             alphabeticalOrder = true
             ratingOrder = false
         }
@@ -132,7 +134,7 @@ class MainActivity : MyActivity() {
 
     fun sortStars(view: View){
         if (!ratingOrder) {
-            sort(list, { a, b -> a.ocena.compareTo(b.ocena) })
+            sort(list, { a, b -> a.recipe.rating.compareTo(b.recipe.rating) })
             ratingOrder = true
             alphabeticalOrder = false
         }
