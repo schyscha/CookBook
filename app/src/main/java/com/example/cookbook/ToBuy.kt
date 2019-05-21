@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.activity_tobuy.*
 
 class ToBuy : MyActivity() {
     lateinit var list : ArrayList<String>
-    val db = TinyDB(this)
+    lateinit var db: TinyDB
+    lateinit var myadapter : ToBuyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,14 +22,19 @@ class ToBuy : MyActivity() {
         TypefaceProvider.registerDefaultIconSets();
 
         recyclerview.layoutManager = LinearLayoutManager(this)
+        db = TinyDB(this)
 
         list = db.getListString("TOBUY")
         if(list == null)
             Toast.makeText(this,"Twoja lista zakupów jest pusta", Toast.LENGTH_LONG).show();
 
-        val myadapter = ToBuyAdapter(list)
+        myadapter = ToBuyAdapter(list, db)
         recyclerview.adapter = myadapter
 
+    }
+
+    fun refresh(){
+        myadapter.notifyDataSetChanged()
     }
 
     fun addToBuy(view: View){

@@ -15,11 +15,11 @@
         <TextView
                 android:text="nazwa"
                 android:layout_width="match_parent"
-                android:layout_height="47dp" android:id="@+id/nazwa" android:textStyle="bold"
+                android:layout_height="wrap_content" android:id="@+id/nazwa" android:textStyle="bold"
                 android:textSize="24sp"/>
         <TextView
                 android:text="tagi"
                 android:layout_width="match_parent"
-                android:layout_height="30dp" android:id="@+id/tagi" android:textStyle="italic"/>
+                android:layout_height="wrap_content" android:id="@+id/tagi" android:textStyle="italic"/>
     </LinearLayout>
 </LinearLayout>

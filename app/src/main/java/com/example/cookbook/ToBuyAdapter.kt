@@ -6,15 +6,19 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.beardedhen.androidbootstrap.BootstrapButton
 import com.beardedhen.androidbootstrap.TypefaceProvider
 
 
-class ToBuyAdapter(val list:ArrayList<String>): RecyclerView.Adapter<ToBuyAdapter.ViewHolder>() {
+class ToBuyAdapter(val list:ArrayList<String>, val db:TinyDB): RecyclerView.Adapter<ToBuyAdapter.ViewHolder>() {
+
+    public lateinit var myparent: ViewGroup
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToBuyAdapter.ViewHolder {
+        myparent = parent
         TypefaceProvider.registerDefaultIconSets();
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_ingredient, parent, false)
-        return ViewHolder(v)
+        return ViewHolder(v, myparent)
     }
 
     //this method is binding the data on the list
@@ -27,16 +31,19 @@ class ToBuyAdapter(val list:ArrayList<String>): RecyclerView.Adapter<ToBuyAdapte
         return list.size
     }
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, val nextparent: ViewGroup): RecyclerView.ViewHolder(view) {
         fun bindItems(data : String){
             val element: TextView = itemView.findViewById(R.id.txt)
             element.text = data
 
 
             //set the onclick listener for the single list item
-            val btn: Button = itemView.findViewById(R.id.button_delete_ingredient)
+            val btn: BootstrapButton = itemView.findViewById(R.id.button_delete_ingredient)
             btn.setOnClickListener({
-                //todo: usuniecie elementu z bazy(listy zakupow)
+                (nextparent as ToBuy).list.remove(data)
+                (nextparent as ToBuy).refresh()
+                //todo: to castowanie wyzej nie dziala...
+
             })
         }
 

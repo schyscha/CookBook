@@ -4,12 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
-import android.widget.RatingBar
-import android.widget.TextView
 import com.beardedhen.androidbootstrap.TypefaceProvider
 import com.example.cookbook.database.CompleteRecipe
 import com.example.cookbook.database.CookBookDatabase
-import java.lang.StringBuilder
+import kotlinx.android.synthetic.main.activity_dish.*
+
 
 class Dish : MyActivity() {
     lateinit var dishL : List<CompleteRecipe>
@@ -28,40 +27,35 @@ class Dish : MyActivity() {
 
         //todo: obrazki
 
-        var _ratingbar : RatingBar = findViewById(R.id.ratingbar)
-        _ratingbar.rating = dish.recipe.rating
+        ratingbar.rating = dish.recipe.rating
 
-        var _nazwa : TextView = findViewById(R.id.nazwa)
-        _nazwa.text = dish.recipe.name
+        nazwa.text = dish.recipe.name
 
-        var _tagi : TextView = findViewById(R.id.tagi)
         val tags= StringBuilder()
         tags.append(dish.tags.first().name)
-        for(i in 1..dish.tags.size){
+        for(i in 1..dish.tags.size-1){
             tags.append(", ")
             tags.append(dish.tags.get(i).name)
         }
-        _tagi.text = tags.toString()
+        tagi.text = tags.toString()
 
-        var _skladniki : TextView = findViewById(R.id.skladniki)
         val ingredients= StringBuilder()
         ingredients.append(dish.ingredientsInfo.first().name)
         ingredients.append(": ")
         ingredients.append(dish.ingredientsInfo.first().quantity)
         ingredients.append(" ")
         ingredients.append(dish.ingredientsInfo.first().unit)
-        for(i in 1..dish.ingredientsInfo.size){
-            tags.append(", ")
-            tags.append(dish.ingredientsInfo.get(i).name)
+        for(i in 1..dish.ingredientsInfo.size-1){
+            ingredients.append(", ")
+            ingredients.append(dish.ingredientsInfo.get(i).name)
             ingredients.append(": ")
             ingredients.append(dish.ingredientsInfo.get(i).quantity)
             ingredients.append(" ")
             ingredients.append(dish.ingredientsInfo.get(i).unit)
         }
-        _skladniki.text = ingredients.toString()
+        skladniki.text = ingredients.toString()
 
-        var _sposob : TextView = findViewById(R.id.sposob)
-        _sposob.text = dish.recipe.instruction
+        sposob.text = dish.recipe.instruction
 
     }
 

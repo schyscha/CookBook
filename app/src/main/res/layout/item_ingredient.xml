@@ -6,7 +6,7 @@
               android:orientation="horizontal">
     <TextView
             android:text="TextView"
-            android:layout_width="346dp"
+            android:layout_width="309dp"
             android:layout_height="match_parent" android:id="@+id/txt" android:layout_weight="1"
             android:textSize="14sp" android:layout_gravity="top"
             android:paddingLeft="@dimen/bootstrap_button_default_corner_radius"

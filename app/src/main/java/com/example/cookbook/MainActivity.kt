@@ -12,6 +12,7 @@ import android.util.Log
 import com.example.cookbook.database.*
 import java.util.Collections.reverse
 import java.util.Collections.sort
+import kotlin.collections.ArrayList
 
 
 class MainActivity : MyActivity() {
@@ -20,13 +21,15 @@ class MainActivity : MyActivity() {
     private lateinit var backToast : Toast
     private var alphabeticalOrder = false
     private var ratingOrder = false
-    private var list =  CookBookDatabase.getInstance(this).getAllCompleteRecipe() as ArrayList<CompleteRecipe>
-    private var myadapter = DishAdapter(list)
+    lateinit var list: ArrayList<CompleteRecipe>
+    private lateinit var myadapter : DishAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         TypefaceProvider.registerDefaultIconSets();
+        list =  CookBookDatabase.getInstance(this).getAllCompleteRecipe() as ArrayList<CompleteRecipe>
+        myadapter = DishAdapter(list)
 
 
 
@@ -69,8 +72,6 @@ class MainActivity : MyActivity() {
         )
         */
 
-
-        //todo: sciagniecie bazy i umieszczenie jej obiektow jako Dish w list
 
         myadapter = DishAdapter(list)
         recyclerview.adapter = myadapter

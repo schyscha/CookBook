@@ -25,6 +25,7 @@
         <activity android:name=".Stats"></activity>
         <activity android:name=".FindDish"></activity>
         <activity android:name=".MyIngredients"></activity>
+        <activity android:name=".Dish"></activity>
 
     </application>
 

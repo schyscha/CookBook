@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cookbook.database.CompleteRecipe
@@ -33,7 +34,7 @@ class DishAdapter(var list:ArrayList<CompleteRecipe>): RecyclerView.Adapter<Dish
         return list.size
     }
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class ViewHolder(val view: View): RecyclerView.ViewHolder(view) {
         fun bindItems(data : CompleteRecipe){
             val _nazwa: TextView = itemView.findViewById(R.id.nazwa)
             val _tagi: TextView = itemView.findViewById(R.id.tagi)
@@ -43,7 +44,7 @@ class DishAdapter(var list:ArrayList<CompleteRecipe>): RecyclerView.Adapter<Dish
 
             val tags= StringBuilder()
             tags.append(data.tags.first().name)
-            for(i in 1..data.tags.size){
+            for(i in 1..data.tags.size-1){
                 tags.append(", ")
                 tags.append(data.tags.get(i).name)
             }
@@ -54,8 +55,9 @@ class DishAdapter(var list:ArrayList<CompleteRecipe>): RecyclerView.Adapter<Dish
             //set the onclick listener for the single list item
             itemView.setOnClickListener({
                 val id : Long = data.recipe.id
-                val myintent = Intent(it.context, Dish::class.java )
+                val myintent = Intent(view.context, Dish::class.java )
                 myintent.putExtra("id", id)
+                view.context.startActivity(myintent)
             })
         }
 
