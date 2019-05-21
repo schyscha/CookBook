@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_dish.*
 class Dish : MyActivity() {
     lateinit var dishL : List<CompleteRecipe>
     lateinit var dish : CompleteRecipe
-    val db = CookBookDatabase.getInstance(this)
+    lateinit var db : CookBookDatabase
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +21,7 @@ class Dish : MyActivity() {
         setContentView(R.layout.activity_dish)
         TypefaceProvider.registerDefaultIconSets();
 
+        db = CookBookDatabase.getInstance(this)
         val id : Long = intent.getLongExtra("id", 0)
         dishL = db.getCompleteRecipe(id)
         dish = dishL.first()
@@ -61,7 +62,7 @@ class Dish : MyActivity() {
 
     //funkcja usuwająca potrawę z bazy
     fun delete(view: View){
-        //todo: funkcja usuwajaca potrawe z bazy(listy)
+        db.recipeDao().delete(dish.recipe) //todo: sypie się
         val intent = Intent(this, MainActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("EXIT", true);

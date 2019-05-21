@@ -110,11 +110,8 @@ class MainActivity : MyActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
         menu.findItem(R.id.action_main).isVisible = false
+        menu.findItem(R.id.action_clean).isVisible = false
         return true
-    }
-
-    override fun clean() {
-
     }
 
     fun sortAZ(view: View){

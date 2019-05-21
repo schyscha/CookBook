@@ -18,7 +18,6 @@ class Stats : MyActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
         menu.findItem(R.id.action_stats).isVisible = false
-        menu.findItem(R.id.action_clean).isVisible = false
         return true
     }
 

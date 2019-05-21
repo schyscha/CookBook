@@ -42,7 +42,6 @@ class ToBuyAdapter(val list:ArrayList<String>, val db:TinyDB): RecyclerView.Adap
             btn.setOnClickListener {
                 (nextparent.context as ToBuy).list.remove(data)
                 (nextparent.context as ToBuy).refresh()
-                //todo: to castowanie wyzej nie dziala...
 
             }
         }

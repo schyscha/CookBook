@@ -114,7 +114,7 @@ open class MyActivity : AppCompatActivity() {
 
         builder.setPositiveButton(
             "Usuń"
-        ) { dialog, which -> clean()}//todo: usuwanie wszystkiego z listy
+        ) { dialog, which -> clean()}
         builder.setNegativeButton(
             "Anuluj"
         ) { dialog, which -> dialog.cancel() }

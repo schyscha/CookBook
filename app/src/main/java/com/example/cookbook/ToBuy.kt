@@ -67,6 +67,7 @@ class ToBuy : MyActivity() {
     }
 
     override fun clean() {
-
+        list.clear()
+        refresh()
     }
 }
