@@ -4,9 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
-import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.beardedhen.androidbootstrap.TypefaceProvider
-import com.bumptech.glide.Glide
 import com.example.cookbook.database.CompleteRecipe
 import com.example.cookbook.database.CookBookDatabase
 import kotlinx.android.synthetic.main.activity_dish.*
@@ -21,19 +20,16 @@ class Dish : MyActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dish)
-        TypefaceProvider.registerDefaultIconSets();
+        TypefaceProvider.registerDefaultIconSets()
 
         db = CookBookDatabase.getInstance(this)
         val id : Long = intent.getLongExtra("id", 0)
         dishL = db.getCompleteRecipe(id)
         dish = dishL.first()
 
-        for (image in dish.recipe.image_urls) {
-            val view = layoutInflater.inflate(R.layout.single_image, null) as ImageView
-
-            Glide.with(this).load(image).into(view)
-            linear_layout_img_dish.addView(view)
-        }
+        val myadapter = ImageAdapter(dish.recipe.image_urls)
+        images.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        images.adapter = myadapter
 
         ratingbar.rating = dish.recipe.rating
         ratingbar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
