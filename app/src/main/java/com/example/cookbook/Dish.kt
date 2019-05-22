@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import com.beardedhen.androidbootstrap.TypefaceProvider
+import com.bumptech.glide.Glide
 import com.example.cookbook.database.CompleteRecipe
 import com.example.cookbook.database.CookBookDatabase
 import kotlinx.android.synthetic.main.activity_dish.*
@@ -26,7 +27,8 @@ class Dish : MyActivity() {
         dishL = db.getCompleteRecipe(id)
         dish = dishL.first()
 
-        //todo: obrazki
+        //todo: przesuwane obrazki
+        Glide.with(this).load(dish.recipe.image_urls[0]).into(img)
 
         ratingbar.rating = dish.recipe.rating
 
@@ -62,7 +64,7 @@ class Dish : MyActivity() {
 
     //funkcja usuwająca potrawę z bazy
     fun delete(view: View){
-        db.recipeDao().delete(dish.recipe) //todo: sypie się
+        db.recipeDao().delete(dish.recipe)
         val intent = Intent(this, MainActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("EXIT", true);
