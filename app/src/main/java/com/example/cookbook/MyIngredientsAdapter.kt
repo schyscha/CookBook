@@ -6,10 +6,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.beardedhen.androidbootstrap.BootstrapButton
 import com.beardedhen.androidbootstrap.TypefaceProvider
+import com.example.cookbook.database.Ingredient
 
 
-class MyIngredientsAdapter(val list:ArrayList<String>): RecyclerView.Adapter<MyIngredientsAdapter.ViewHolder>() {
+class MyIngredientsAdapter(val list:ArrayList<Ingredient>): RecyclerView.Adapter<MyIngredientsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyIngredientsAdapter.ViewHolder {
         TypefaceProvider.registerDefaultIconSets();
@@ -27,16 +29,18 @@ class MyIngredientsAdapter(val list:ArrayList<String>): RecyclerView.Adapter<MyI
         return list.size
     }
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        fun bindItems(data : String){
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        fun bindItems(data: Ingredient) {
+
             val element: TextView = itemView.findViewById(R.id.txt)
-            element.text = data
+            element.text = data.name
 
             //set the onclick listener for the single list item
-            val btn: Button = itemView.findViewById(R.id.button_delete_ingredient)
+            val btn: BootstrapButton = itemView.findViewById(R.id.button_delete_ingredient)
             btn.setOnClickListener({
                 //todo: usuniecie elementu z bazy(listy posiadanych skladnikow)
             })
+
         }
 
     }
