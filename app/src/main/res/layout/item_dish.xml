@@ -6,6 +6,7 @@
               android:orientation="horizontal">
     <ImageView
             android:layout_width="174dp"
+            android:adjustViewBounds="true"
             android:layout_height="match_parent" app:srcCompat="@mipmap/ic_launcher" android:id="@+id/img"
             android:layout_weight="1"/>
     <LinearLayout
@@ -14,11 +15,13 @@
             android:layout_height="match_parent" android:layout_weight="1">
         <TextView
                 android:text="nazwa"
+                android:paddingLeft="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/nazwa" android:textStyle="bold"
                 android:textSize="24sp"/>
         <TextView
                 android:text="tagi"
+                android:paddingLeft="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/tagi" android:textStyle="italic"/>
     </LinearLayout>
