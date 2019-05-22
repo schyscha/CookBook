@@ -4,4 +4,9 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_weight="1"
-           android:contentDescription="Image describing dish"/>
+           android:layout_alignParentTop="true"
+           android:layout_centerHorizontal="true"
+           android:layout_margin="5dp"
+           android:scaleType="centerCrop"
+           android:contentDescription="Image describing dish"
+           android:paddingLeft="10dp" android:paddingRight="10dp"/>
