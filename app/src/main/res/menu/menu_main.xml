@@ -22,10 +22,6 @@
           android:title="Posiadane składniki"
           android:orderInCategory="100"
           app:showAsAction="never"/>
-    <item android:id="@+id/action_stats"
-          android:title="Statystyki"
-          android:orderInCategory="100"
-          app:showAsAction="never"/>
     <item android:id="@+id/action_search"
           android:title="Wyszukaj potrawę"
           android:orderInCategory="100"

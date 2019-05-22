@@ -23,6 +23,9 @@
                 android:text="tagi"
                 android:paddingLeft="3dp"
                 android:layout_width="match_parent"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:ems="3"
                 android:layout_height="wrap_content" android:id="@+id/tagi" android:textStyle="italic"/>
     </LinearLayout>
 </LinearLayout>

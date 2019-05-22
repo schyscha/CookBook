@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.beardedhen.androidbootstrap.TypefaceProvider
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 import android.util.Log
 import com.example.cookbook.database.*
 import java.util.Collections.reverse

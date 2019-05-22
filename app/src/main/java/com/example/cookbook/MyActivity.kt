@@ -38,11 +38,6 @@ open class MyActivity : AppCompatActivity() {
                 startActivity(intent)
                 true
             }
-            R.id.action_stats -> {
-                val intent = Intent(this, Stats::class.java)
-                startActivity(intent)
-                true
-            }
             R.id.action_search -> {
                 showSearchDialog()
                 true
@@ -123,7 +118,6 @@ open class MyActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    //todo: usuwanie (override w klasie dziedziczącej)
     open fun clean(){}
 
     //todo: wyszukiwanie

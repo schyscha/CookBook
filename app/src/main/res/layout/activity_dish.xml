@@ -14,19 +14,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/linearlayout">
-            <RatingBar
-                    android:layout_width="wrap_content"
-                    android:numStars="5"
-                    android:layout_height="wrap_content" android:id="@+id/ratingbar" android:layout_gravity="center"/>
-            <com.beardedhen.androidbootstrap.BootstrapButton
-                    app:showOutline="false"
-                    app:roundedCorners="true"
-                    app:bootstrapBrand="danger"
-                    android:text="Usuń potrawę"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/button_add_dish"
-                    android:textSize="18sp" android:textStyle="bold"
-                    android:onClick="delete"/>
             <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/cardview"
@@ -86,6 +73,19 @@
                     />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                    app:showOutline="false"
+                    app:roundedCorners="true"
+                    app:bootstrapBrand="danger"
+                    android:text="Usuń potrawę"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/button_add_dish"
+                    android:textSize="18sp" android:textStyle="bold"
+                    android:onClick="delete"/>
+            <RatingBar
+                    android:layout_width="wrap_content"
+                    android:numStars="5"
+                    android:layout_height="wrap_content" android:id="@+id/ratingbar" android:layout_gravity="center"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

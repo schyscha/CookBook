@@ -36,6 +36,9 @@ class Dish : MyActivity() {
         }
 
         ratingbar.rating = dish.recipe.rating
+        ratingbar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+            dish.recipe.rating = ratingbar.rating
+            db.recipeDao().update(dish.recipe)}
 
         nazwa.text = dish.recipe.name
 
