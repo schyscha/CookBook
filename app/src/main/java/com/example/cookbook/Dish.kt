@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import android.widget.ImageView
 import com.beardedhen.androidbootstrap.TypefaceProvider
 import com.bumptech.glide.Glide
 import com.example.cookbook.database.CompleteRecipe
@@ -27,8 +28,12 @@ class Dish : MyActivity() {
         dishL = db.getCompleteRecipe(id)
         dish = dishL.first()
 
-        //todo: przesuwane obrazki
-        Glide.with(this).load(dish.recipe.image_urls[0]).into(img)
+        for (image in dish.recipe.image_urls) {
+            val view = layoutInflater.inflate(R.layout.single_image, null) as ImageView
+
+            Glide.with(this).load(image).into(view)
+            linear_layout_img_dish.addView(view)
+        }
 
         ratingbar.rating = dish.recipe.rating
 
