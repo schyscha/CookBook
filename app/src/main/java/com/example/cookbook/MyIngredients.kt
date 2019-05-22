@@ -22,20 +22,10 @@ class MyIngredients : MyActivity() {
 
         recyclerview.layoutManager = LinearLayoutManager(this)
 
-
         val db = CookBookDatabase.getInstance(this)
-        list = db.ingredientDao().getAll() as ArrayList<Ingredient>
+        list = db.ingredientDao().getOwnedIngredients() as ArrayList<Ingredient>
 
-        var actual = ArrayList<Ingredient>()
-
-        for (elem in list) {
-            if (elem.is_owned) {
-                actual.add(elem)
-            }
-        }
-
-
-        val myadapter = MyIngredientsAdapter(actual)
+        val myadapter = MyIngredientsAdapter(list)
         recyclerview.adapter = myadapter
     }
 
