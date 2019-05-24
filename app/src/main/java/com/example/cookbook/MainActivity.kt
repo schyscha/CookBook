@@ -27,7 +27,13 @@ class MainActivity : MyActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         TypefaceProvider.registerDefaultIconSets();
-        list =  CookBookDatabase.getInstance(this).getAllCompleteRecipe() as ArrayList<CompleteRecipe>
+
+        val search : String? = intent.getStringExtra("search")
+        if (search==null)
+            list =  CookBookDatabase.getInstance(this).getAllCompleteRecipe() as ArrayList<CompleteRecipe>
+        else
+            list = CookBookDatabase.getInstance(this).recipeDao().getRecipesBySearch(search) as ArrayList<CompleteRecipe>
+        //todo: wyzej uzyskac liste CompleteRecipe, a nie Recipe jak dotychczas...
         myadapter = DishAdapter(list)
 
 
@@ -89,7 +95,7 @@ class MainActivity : MyActivity() {
         val recipeTagDAO = database.recipeTagDao()*/
     }
 
-    //obsługa wyjscia z aplikajci po podwojnym kliknieciu WSTECZ w glownej aktywnosci
+    //obsługa wyjscia z aplikacji po podwojnym kliknieciu WSTECZ w glownej aktywnosci
     override fun onBackPressed() {
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
             backToast.cancel()

@@ -3,7 +3,6 @@ package com.example.cookbook
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.beardedhen.androidbootstrap.BootstrapButton
@@ -12,7 +11,7 @@ import com.beardedhen.androidbootstrap.TypefaceProvider
 
 class ToBuyAdapter(val list:ArrayList<String>, val db:TinyDB): RecyclerView.Adapter<ToBuyAdapter.ViewHolder>() {
 
-    public lateinit var myparent: ViewGroup
+    lateinit var myparent: ViewGroup
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToBuyAdapter.ViewHolder {
         myparent = parent

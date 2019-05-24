@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.beardedhen.androidbootstrap.TypefaceProvider
 import com.example.cookbook.database.CookBookDatabase
 import com.example.cookbook.database.Ingredient
-import com.example.cookbook.database.IngredientDAO_Impl
-import com.example.cookbook.database.RecipeDAO
 import kotlinx.android.synthetic.main.activity_tobuy.*
 import java.util.*
 
 class MyIngredients : MyActivity() {
     private var list = ArrayList<Ingredient>()
+    lateinit var db : CookBookDatabase
+    lateinit var myadapter : MyIngredientsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,20 +22,26 @@ class MyIngredients : MyActivity() {
 
         recyclerview.layoutManager = LinearLayoutManager(this)
 
-        val db = CookBookDatabase.getInstance(this)
-        list = db.ingredientDao().getOwnedIngredients() as ArrayList<Ingredient>
+        db = CookBookDatabase.getInstance(this)
+        refresh()
+    }
 
-        val myadapter = MyIngredientsAdapter(list)
+    fun refresh(){
+        list = db.ingredientDao().getOwnedIngredients() as ArrayList<Ingredient>
+        myadapter = MyIngredientsAdapter(list)
         recyclerview.adapter = myadapter
     }
 
-    //todo: dodawanie do bazy listy posiadanych składników
     fun addIngredient(view: View){
-
+        //todo: jak poprawnie wstawic dialog z layoutem z dialog_ingredient? co z polem ID skladnika w bazie?
     }
 
     override fun clean() {
-
+        for (elem in list) {
+            elem.is_owned = false
+            db.ingredientDao().update(elem)
+        }
+        refresh()
     }
 
     //dodanie menu kontekstowego

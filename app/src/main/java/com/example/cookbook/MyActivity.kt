@@ -67,8 +67,8 @@ open class MyActivity : AppCompatActivity() {
 
         builder.setTitle("O aplikacji")
         builder.setMessage(
-            Html.fromHtml("<b>Wersja 0.4<br><br>Autorzy:</b><br><i> " +
-                    "Olga Błaszczyk<br> Bartosz Drzaga<br> Filip Gawin<br> Szymon Rozmarynowski</i>"))
+            Html.fromHtml("<b>Wersja 0.9<br><br>Autorzy:</b><br><i> " +
+                    "Bartosz Drzaga<br> Filip Gawin<br> Szymon Rozmarynowski</i>"))
 
         builder.setPositiveButton("Zamknij"){dialog, which ->}
         dialog = builder.create()
@@ -88,7 +88,7 @@ open class MyActivity : AppCompatActivity() {
 
         builder.setPositiveButton(
             "Wyszukaj"
-        ) { dialog, which -> search = input.text.toString(); showResults()}//todo: wyszukiwanie, pokazywanie rezultatow
+        ) { dialog, which -> search = input.text.toString(); showResults(search)}//todo: wyszukiwanie, pokazywanie rezultatow
         builder.setNegativeButton(
             "Anuluj"
         ) { dialog, which -> dialog.cancel() }
@@ -121,8 +121,10 @@ open class MyActivity : AppCompatActivity() {
     open fun clean(){}
 
     //todo: wyszukiwanie
-    fun showResults(){
-
+    fun showResults(name : String){
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("search", name)
+        startActivity(intent);
     }
 
 }
