@@ -1,5 +1,6 @@
 package com.example.cookbook
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -33,6 +34,9 @@ class MyIngredients : MyActivity() {
     }
 
     fun addIngredient(view: View){
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_ingredient)
+        dialog.show()
         //todo: jak poprawnie wstawic dialog z layoutem z dialog_ingredient? co z polem ID skladnika w bazie?
     }
 

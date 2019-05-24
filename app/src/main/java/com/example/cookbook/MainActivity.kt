@@ -1,5 +1,6 @@
 package com.example.cookbook
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -153,7 +154,9 @@ class MainActivity : MyActivity() {
 
     //todo: dodawanie do bazy potraw
     fun add(view: View){
-
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_dish)
+        dialog.show()
     }
 }
 
