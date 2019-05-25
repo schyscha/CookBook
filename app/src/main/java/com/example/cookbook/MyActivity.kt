@@ -120,7 +120,7 @@ open class MyActivity : AppCompatActivity() {
 
     open fun clean(){}
 
-    //todo: wyszukiwanie
+
     fun showResults(name : String){
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("search", name)

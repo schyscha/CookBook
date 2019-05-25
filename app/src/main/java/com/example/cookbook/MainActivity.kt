@@ -22,7 +22,9 @@ class MainActivity : MyActivity() {
     private var alphabeticalOrder = false
     private var ratingOrder = false
     lateinit var list: ArrayList<CompleteRecipe>
+    lateinit var tempList: List<Recipe>
     private lateinit var myadapter : DishAdapter
+    private var searching : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +32,19 @@ class MainActivity : MyActivity() {
         TypefaceProvider.registerDefaultIconSets();
 
         val search : String? = intent.getStringExtra("search")
-        if (search==null)
-            list =  CookBookDatabase.getInstance(this).getAllCompleteRecipe() as ArrayList<CompleteRecipe>
-        else
-            list = CookBookDatabase.getInstance(this).recipeDao().getRecipesBySearch(search) as ArrayList<CompleteRecipe>
-        //todo: wyzej uzyskac liste CompleteRecipe, a nie Recipe jak dotychczas...
-        myadapter = DishAdapter(list)
+        list =  CookBookDatabase.getInstance(this).getAllCompleteRecipe() as ArrayList<CompleteRecipe>
 
+        if (search != null) {
+            searching = true
+            list.clear()
+            tempList = CookBookDatabase.getInstance(this).recipeDao().getRecipesBySearch(search)
+            for (recipe in tempList)
+                list.addAll(CookBookDatabase.getInstance(this).getCompleteRecipe(recipe.id))
+        }
+        else
+            searching = false
+
+        myadapter = DishAdapter(list)
 
 
         recyclerview.layoutManager = LinearLayoutManager(this)
@@ -115,7 +123,8 @@ class MainActivity : MyActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
-        menu.findItem(R.id.action_main).isVisible = false
+        if (!searching)
+            menu.findItem(R.id.action_main).isVisible = false
         menu.findItem(R.id.action_clean).isVisible = false
         return true
     }
