@@ -88,7 +88,7 @@ open class MyActivity : AppCompatActivity() {
 
         builder.setPositiveButton(
             "Wyszukaj"
-        ) { dialog, which -> search = input.text.toString(); showResults(search)}//todo: wyszukiwanie, pokazywanie rezultatow
+        ) { dialog, which -> search = input.text.toString(); showResults(search)}
         builder.setNegativeButton(
             "Anuluj"
         ) { dialog, which -> dialog.cancel() }

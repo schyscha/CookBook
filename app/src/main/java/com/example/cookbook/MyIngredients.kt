@@ -9,6 +9,7 @@ import com.beardedhen.androidbootstrap.TypefaceProvider
 import com.example.cookbook.database.CookBookDatabase
 import com.example.cookbook.database.Ingredient
 import kotlinx.android.synthetic.main.activity_tobuy.*
+import kotlinx.android.synthetic.main.dialog_ingredient.*
 import java.util.*
 
 class MyIngredients : MyActivity() {
@@ -36,8 +37,22 @@ class MyIngredients : MyActivity() {
     fun addIngredient(view: View){
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_ingredient)
+
+        dialog.btn_cancel.setOnClickListener { dialog.hide() }
+        dialog.btn_add.setOnClickListener {
+            var input = dialog.editText.text.toString()
+            if (input.isNotEmpty())
+                newIngredient(input, dialog.checkBox.isChecked)
+            dialog.hide()
+        }
+
         dialog.show()
-        //todo: jak poprawnie wstawic dialog z layoutem z dialog_ingredient? co z polem ID skladnika w bazie?
+    }
+
+    fun newIngredient(name : String, owned : Boolean){
+        val ingredient = Ingredient(0, name, owned)
+        db.ingredientDao().insert(ingredient)
+        refresh()
     }
 
     override fun clean() {
