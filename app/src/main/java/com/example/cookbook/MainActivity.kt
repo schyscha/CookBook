@@ -120,15 +120,22 @@ class MainActivity : MyActivity() {
         dialog.btn_cancel.setOnClickListener { dialog.hide() }
         dialog.btn_add.setOnClickListener {
             val name = dialog.dishNameTextEdit.text.toString()
-            var links = dialog.ImgLinksTextEdit.text.toString().split(",") as ArrayList<String>
             val instr = dialog.instructionsTextEdit.text.toString()
             val rating = dialog.ratingbar.rating
 
-            if(links.isEmpty())
-                links = ArrayList<String>()
+            var linksArray = ArrayList<String>()
+            val links = dialog.ImgLinksTextEdit.text.toString()
+            if (links.isNotEmpty()) {
+                val splited = dialog.ImgLinksTextEdit.text.toString().split(",")
+                if(splited.size > 1) {
+                    linksArray = splited as ArrayList<String>
+                } else {
+                    linksArray.add(links)
+                }
+            }
 
             if (name.isNotEmpty() && instr.isNotEmpty())
-                newDish(name, links, instr, rating)
+                newDish(name, linksArray, instr, rating)
             dialog.hide()
         }
     }
