@@ -39,19 +39,23 @@ class Dish : MyActivity() {
         nazwa.text = dish.recipe.name
 
         val tags= StringBuilder()
-        tags.append(dish.tags.first().name)
-        for(i in 1..dish.tags.size-1){
-            tags.append(", ")
-            tags.append(dish.tags.get(i).name)
+        if (tags.isNotEmpty()) {
+            tags.append(dish.tags.first().name)
+            for (i in 1..dish.tags.size - 1) {
+                tags.append(", ")
+                tags.append(dish.tags.get(i).name)
+            }
         }
         tagi.text = tags.toString()
 
         val ingredients= StringBuilder()
-        ingredients.append(dish.ingredientsInfo.first().name)
-        ingredients.append(": ")
-        ingredients.append(dish.ingredientsInfo.first().quantity)
-        ingredients.append(" ")
-        ingredients.append(dish.ingredientsInfo.first().unit)
+        if (dish.ingredientsInfo.isNotEmpty()) {
+            ingredients.append(dish.ingredientsInfo.first().name)
+            ingredients.append(": ")
+            ingredients.append(dish.ingredientsInfo.first().quantity)
+            ingredients.append(" ")
+            ingredients.append(dish.ingredientsInfo.first().unit)
+        }
         for(i in 1..dish.ingredientsInfo.size-1){
             ingredients.append("\n")
             ingredients.append(dish.ingredientsInfo.get(i).name)

@@ -42,14 +42,17 @@ class DishAdapter(var list:ArrayList<CompleteRecipe>): RecyclerView.Adapter<Dish
             _nazwa.text = data.recipe.name
 
             val tags= StringBuilder()
-            tags.append(data.tags.first().name)
-            for(i in 1..data.tags.size-1){
-                tags.append(", ")
-                tags.append(data.tags.get(i).name)
+            if (data.tags.isNotEmpty()) {
+                tags.append(data.tags.first().name)
+                for (i in 1..data.tags.size - 1) {
+                    tags.append(", ")
+                    tags.append(data.tags.get(i).name)
+                }
             }
             _tagi.text = tags.toString()
 
-            Glide.with(this.itemView).load(data.recipe.image_urls.first()).into(_img);
+            if (data.recipe.image_urls.isNotEmpty())
+                Glide.with(this.itemView).load(data.recipe.image_urls.first()).into(_img);
 
             //set the onclick listener for the single list item
             itemView.setOnClickListener({
