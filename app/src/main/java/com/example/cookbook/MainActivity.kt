@@ -10,13 +10,16 @@ import com.beardedhen.androidbootstrap.TypefaceProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import android.util.Log
 import com.example.cookbook.database.*
+import kotlinx.android.synthetic.main.dialog_dish.*
+import kotlinx.android.synthetic.main.dialog_dish.btn_add
+import kotlinx.android.synthetic.main.dialog_dish.btn_cancel
+import kotlinx.android.synthetic.main.dialog_ingredient.*
 import java.util.Collections.reverse
 import java.util.Collections.sort
 import kotlin.collections.ArrayList
 
 
 class MainActivity : MyActivity() {
-
     private var backPressedTime: Long = 0
     private lateinit var backToast : Toast
     private var alphabeticalOrder = false
@@ -46,62 +49,10 @@ class MainActivity : MyActivity() {
 
         myadapter = DishAdapter(list)
 
-
         recyclerview.layoutManager = LinearLayoutManager(this)
-
-        // todo: Usunąć te hardcode'owane dania
-        /*
-        list.add(
-            Dish(
-                0,
-                "Pulpety",
-                4f,
-                arrayOf("link"),
-                arrayOf("studenty lubią"),
-                arrayOf("Pulpety"),
-                "Zrobić"
-            )
-        )
-        list.add(
-            Dish(
-                1,
-                "Płatki z mlekiem",
-                3f,
-                arrayOf("link"),
-                arrayOf("tanio"),
-                arrayOf("Płatki", "Mleko"),
-                "Zrobić"
-            )
-        )
-        list.add(
-            Dish(
-                2,
-                "Chleb z nutellą",
-                1f,
-                arrayOf("link"),
-                arrayOf("słodko"),
-                arrayOf("Chleb", "Nutella"),
-                "Zrobić"
-            )
-        )
-        */
-
 
         myadapter = DishAdapter(list)
         recyclerview.adapter = myadapter
-
-        val database = CookBookDatabase.getInstance(this)
-        val recipeDAO = database.recipeDao()
-        val ingredientDAO = database.ingredientDao()
-        Log.e("CB", recipeDAO.getBestRecipesForOwnedIngredients().toString())
-        Log.e("CB", recipeDAO.getRecipesBySearch("paszteciki").toString())
-        Log.e("CB", ingredientDAO.getIngredientsToBuyForRecipe(3).toString())
-        Log.e("CB", database.getAllCompleteRecipe().toString())
-        /*
-        val tagDao = database.tagDao()
-        val ingredientDAO = database.ingredientDao()
-        val recipeIngredientDAO = database.recipeIngredientDao()
-        val recipeTagDAO = database.recipeTagDao()*/
     }
 
     //obsługa wyjscia z aplikacji po podwojnym kliknieciu WSTECZ w glownej aktywnosci
@@ -161,11 +112,39 @@ class MainActivity : MyActivity() {
         myadapter.notifyDataSetChanged()
     }
 
-    //todo: dodawanie do bazy potraw
     fun add(view: View){
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_dish)
         dialog.show()
+
+        dialog.btn_cancel.setOnClickListener { dialog.hide() }
+        dialog.btn_add.setOnClickListener {
+            val name = dialog.dishNameTextEdit.text.toString()
+            var links = dialog.ImgLinksTextEdit.text.toString().split(",") as ArrayList<String>
+            val instr = dialog.instructionsTextEdit.text.toString()
+            val rating = dialog.ratingbar.rating
+
+            if(links.isEmpty())
+                links = ArrayList<String>()
+
+            if (name.isNotEmpty() && instr.isNotEmpty())
+                newDish(name, links, instr, rating)
+            dialog.hide()
+        }
+    }
+
+    fun newDish(name : String, links: ArrayList<String>, instruction: String, rating: Float){
+        val recipe = Recipe(0, name, links, instruction, rating)
+        val db = CookBookDatabase.getInstance(this)
+        db.recipeDao().insert(recipe)
+        refresh()
+    }
+
+    fun refresh(){
+        val db = CookBookDatabase.getInstance(this)
+        list = db.getAllCompleteRecipe() as ArrayList<CompleteRecipe>
+        myadapter.setDishes(list)
+        myadapter.notifyDataSetChanged()
     }
 }
 
