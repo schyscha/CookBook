@@ -8,12 +8,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.beardedhen.androidbootstrap.TypefaceProvider
 import kotlinx.android.synthetic.main.activity_main.*
-import android.util.Log
 import com.example.cookbook.database.*
 import kotlinx.android.synthetic.main.dialog_dish.*
 import kotlinx.android.synthetic.main.dialog_dish.btn_add
 import kotlinx.android.synthetic.main.dialog_dish.btn_cancel
-import kotlinx.android.synthetic.main.dialog_ingredient.*
 import java.util.Collections.reverse
 import java.util.Collections.sort
 import kotlin.collections.ArrayList
@@ -32,7 +30,7 @@ class MainActivity : MyActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        TypefaceProvider.registerDefaultIconSets();
+        TypefaceProvider.registerDefaultIconSets()
 
         val search : String? = intent.getStringExtra("search")
         list =  CookBookDatabase.getInstance(this).getAllCompleteRecipe() as ArrayList<CompleteRecipe>
@@ -126,7 +124,7 @@ class MainActivity : MyActivity() {
             var linksArray = ArrayList<String>()
             val links = dialog.ImgLinksTextEdit.text.toString()
             if (links.isNotEmpty()) {
-                val splited = dialog.ImgLinksTextEdit.text.toString().split(",")
+                val splited = links.split(",", ", ")
                 if(splited.size > 1) {
                     linksArray = splited as ArrayList<String>
                 } else {
@@ -134,16 +132,48 @@ class MainActivity : MyActivity() {
                 }
             }
 
+            var tagsArray = ArrayList<String>()
+            val tags = dialog.tagsTextEdit.text.toString()
+            if (tags.isNotEmpty()) {
+                val splited = tags.split(",", ", ")
+                if(splited.size > 1) {
+                    tagsArray = splited as ArrayList<String>
+                } else {
+                    tagsArray.add(tags)
+                }
+            }
+
+            var ingrArray = ArrayList<String>()
+            val ingredients = dialog.ingrTextEdit.text.toString()
+            if (ingredients.isNotEmpty()) {
+                val splited = ingredients.split(",", ", ")
+                if(splited.size > 1) {
+                    ingrArray = splited as ArrayList<String>
+                } else {
+                    ingrArray.add(ingredients)
+                }
+            }
+
             if (name.isNotEmpty() && instr.isNotEmpty())
-                newDish(name, linksArray, instr, rating)
+                newDish(name, linksArray, instr, ingrArray, tagsArray, rating)
             dialog.hide()
         }
     }
 
-    fun newDish(name : String, links: ArrayList<String>, instruction: String, rating: Float){
-        val recipe = Recipe(0, name, links, instruction, rating)
+    fun newDish(name : String, links: ArrayList<String>, instruction: String, ingriedients: ArrayList<String>, tags: ArrayList<String>, rating: Float){
+        var relations = ArrayList<CompleteRecipeIngredientRelation>()
+
+        for (ingr in ingriedients) {
+            val ingrDataArray = ingr.split(" ")
+            Toast.makeText(getApplicationContext(), "size to " + ingrDataArray.size, Toast.LENGTH_SHORT).show()
+            if(ingrDataArray.size == 3) {
+                relations.add(CompleteRecipeIngredientRelation(0, ingrDataArray[0], ingrDataArray[1].toInt(), ingrDataArray[2], false))
+            }
+        }
+
         val db = CookBookDatabase.getInstance(this)
-        db.recipeDao().insert(recipe)
+        db.insert(name, links, instruction, rating, relations, tags)
+
         refresh()
     }
 

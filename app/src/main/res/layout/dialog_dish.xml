@@ -25,6 +25,18 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/instructionsTextEdit" android:hint="Instrukcja przygotowania"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/ingrTextEdit" android:hint="Składniki"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/tagsTextEdit" android:hint="Tagi"/>
 
     <RatingBar
             android:layout_width="wrap_content"
