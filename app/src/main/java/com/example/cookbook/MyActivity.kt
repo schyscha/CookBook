@@ -67,7 +67,7 @@ open class MyActivity : AppCompatActivity() {
 
         builder.setTitle("O aplikacji")
         builder.setMessage(
-            Html.fromHtml("<b>Wersja 0.9<br><br>Autorzy:</b><br><i> " +
+            Html.fromHtml("<b>Wersja 1.0<br><br>Autorzy:</b><br><i> " +
                     "Bartosz Drzaga<br> Filip Gawin<br> Szymon Rozmarynowski</i>"))
 
         builder.setPositiveButton("Zamknij"){dialog, which ->}

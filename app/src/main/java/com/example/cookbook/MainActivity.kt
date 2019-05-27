@@ -165,7 +165,6 @@ class MainActivity : MyActivity() {
 
         for (ingr in ingriedients) {
             val ingrDataArray = ingr.split(" ")
-            Toast.makeText(getApplicationContext(), "size to " + ingrDataArray.size, Toast.LENGTH_SHORT).show()
             if(ingrDataArray.size == 3) {
                 relations.add(CompleteRecipeIngredientRelation(0, ingrDataArray[0], ingrDataArray[1].toInt(), ingrDataArray[2], false))
             }

@@ -39,7 +39,7 @@ class Dish : MyActivity() {
         nazwa.text = dish.recipe.name
 
         val tags= StringBuilder()
-        if (tags.isNotEmpty()) {
+        if (dish.tags.isNotEmpty()) {
             tags.append(dish.tags.first().name)
             for (i in 1..dish.tags.size - 1) {
                 tags.append(", ")
